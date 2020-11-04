@@ -61,3 +61,37 @@ print(data)
 
 '''For PUT and PATCH, you can simply use the same code as we have used for POST'''
 
+
+# Authenticating and maintain connection state through sessions and cookies
+print("\nChecking Authentication:\n")
+'''This Link might not work, this is just a sample code.'''
+link = 'http://testing-ground.scraping.pro/login'
+
+LOGGED_SELECTOR = '#case_login > h3'
+
+
+def is_logged(html_source):
+    global soup
+    soup = BeautifulSoup(html_source)
+    elements = soup.select(LOGGED_SELECTOR)
+
+    if len(elements) == 1:
+        element = elements[0]
+        if 'success' in element.get('class', []):
+            return True
+        else:
+            return False
+    elif len(elements) > 1:
+        raise Exception('Something is wrong with the source')
+    else:
+        return False
+
+
+input_data = {"usr": "admin", "pwd": "12345"}
+s = req.Session()
+
+r_post = s.post(link + "?mode=login", input_data)
+r_get = s.get(link + "?mode=welcome")
+
+print(is_logged(r_post.content))
+print(is_logged(r_get.content))
