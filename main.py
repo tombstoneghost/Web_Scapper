@@ -27,3 +27,14 @@ print(len(lists))
 print("\nList Children:\n")
 childs = list(lists[3].children)
 print(childs)
+
+# Finding Links
+print("\nLinks:\n")
+links = soup.find_all("a")
+print(len(links))
+
+# Applying Attribute Filter
+print("\nFiltered Link List:\n")
+attr_filter = {"class": "mw-jump-link", "href": "#mw-head"}
+filtered_list = soup.find_all(attr_filter)
+print(filtered_list)
