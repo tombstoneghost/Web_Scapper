@@ -36,5 +36,10 @@ print(len(links))
 # Applying Attribute Filter
 print("\nFiltered Link List:\n")
 attr_filter = {"class": "mw-jump-link", "href": "#mw-head"}
-filtered_list = soup.find_all(attr_filter)
+filtered_list = soup.find_all("a", attr_filter)
 print(filtered_list)
+
+# Using CSS selectors
+print("\nSelector:\n")
+selector = "div.thumb:nth-child(49) > div:nth-child(1) > a:nth-child(1) > img:nth-child(1)"
+print(soup.select(selector=selector))
