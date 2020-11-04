@@ -1,6 +1,7 @@
 # Imports
 import requests as req
 from bs4 import BeautifulSoup
+import json
 
 # Target URL
 URL = "https://pt.wikipedia.org/wiki/Ariquemes"
@@ -43,3 +44,20 @@ print(filtered_list)
 print("\nSelector:\n")
 selector = "div.thumb:nth-child(49) > div:nth-child(1) > a:nth-child(1) > img:nth-child(1)"
 print(soup.select(selector=selector))
+
+# Sending POST, PUT and PATCH data with modified Headers
+print("\nJSON Data:\n")
+api_link = 'https://jsonplaceholder.typicode.com/posts'
+r = req.get(api_link)
+data = json.loads(r.content)
+print(data)
+
+print("\nNew JSON Data:\n")
+input_data = json.dumps({"title": "test title", "user_id": 5})
+headers = {"Content-Type": "application/json"}
+r = req.post(api_link, input_data, headers)
+data = json.loads(r.content)
+print(data)
+
+'''For PUT and PATCH, you can simply use the same code as we have used for POST'''
+
